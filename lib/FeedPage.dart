@@ -9,7 +9,6 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPage extends State<FeedPage> {
-  late List data;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _FeedPage extends State<FeedPage> {
           ),
         ),
         title: const Text('Video Feed'),
-        backgroundColor: Color(0xff1f2c34),
+        backgroundColor: const Color(0xff1f2c34),
       ),
       body: FutureBuilder(
         future: DefaultAssetBundle.of(context)
