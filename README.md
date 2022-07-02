@@ -1,6 +1,6 @@
 # Video Feed
 
-This is simple flutter app which has landing page with autoplay functionality of YouTube depending upon the visibility in viewport.
+This is a simple flutter app which has landing page with autoplay functionality similar to that of YouTube depending upon the visibility in viewport.
 
 ## Packages Used
 - video_player
