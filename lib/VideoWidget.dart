@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoWidget extends StatefulWidget {
@@ -59,7 +61,9 @@ class _VideoWidgetState extends State<VideoWidget> {
           return VideoPlayer(_controller);
         } else {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: SpinKitFadingCircle(
+              color: Colors.amber,
+            ),
           );
         }
       },

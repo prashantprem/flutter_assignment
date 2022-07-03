@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
 
 import 'VideoWidget.dart';
@@ -32,7 +33,6 @@ class VideoList extends StatelessWidget {
                 width: double.infinity,
                 height: _size.height / 2.5,
                 alignment: Alignment.center,
-                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     return InViewNotifierWidget(
@@ -43,18 +43,39 @@ class VideoList extends StatelessWidget {
                             ? Container(
                                 width: _size.width,
                                 height: _size.height / 3.1,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.black26,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        decoration:
+                                            BoxDecoration(color: Colors.grey),
+                                        child: VideoWidget(
+                                            play: isInView,
+                                            url: data[index]['videoUrl']),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 20),
+                                      child: Text(
+                                        data[index]['id'].toString() +
+                                            " | " +
+                                            data[index]['title'],
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                child: VideoWidget(
-                                    play: isInView,
-                                    url: data[index]['videoUrl']),
                               )
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
+                                    width: _size.width,
                                     decoration: BoxDecoration(
                                         color: Colors.black26,
                                         borderRadius:
@@ -63,6 +84,18 @@ class VideoList extends StatelessWidget {
                                     child: Image.network(
                                       data[index]['coverPicture'],
                                       fit: BoxFit.fill,
+                                      loadingBuilder: (BuildContext context,
+                                          Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return const Center(
+                                          child: SpinKitFadingCircle(
+                                            color: Colors.amber,
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                   Padding(
